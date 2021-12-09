@@ -45,7 +45,7 @@
                 android:id="@+id/alertBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Theme Toggle"
+                android:text="@string/alert_dialog"
                 style="@style/Widget.Material3.Button.ElevatedButton" />
 
         </LinearLayout>
@@ -55,6 +55,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabBtn"
+        android:contentDescription="@string/fab_content_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

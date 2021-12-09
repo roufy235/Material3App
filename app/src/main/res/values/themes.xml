@@ -13,4 +13,19 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Base.Widget.Material3.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/white</item>
+        <item name="borderWidth">@dimen/m3_fab_border_width</item>
+        <item name="elevation">6dp</item>
+        <item name="enforceMaterialTheme">true</item>
+        <item name="hoveredFocusedTranslationZ">@dimen/m3_fab_translation_z_hovered_focused</item>
+        <item name="pressedTranslationZ">@dimen/m3_fab_translation_z_pressed</item>
+        <item name="rippleColor">@color/m3_button_ripple_color_selector</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Material3.FloatingActionButton</item>
+        <item name="tint">@color/purple_200</item>
+        <!--Remove the motion spec and allow FloatingActionButtonImpl to create a theme-based animation-->
+        <item name="showMotionSpec">@null</item>
+        <item name="hideMotionSpec">@null</item>
+    </style>
 </resources>
