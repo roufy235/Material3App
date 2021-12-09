@@ -1,12 +1,11 @@
 package com.covirtue.material3app
 
-import android.app.Activity
-import android.content.res.Configuration
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.covirtue.material3app.services.SharedPrefObject
@@ -34,18 +33,32 @@ class MainActivity : AppCompatActivity() {
             isDark = when(checkBool) {
                 false -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    topAppBar.setNavigationIconTint(resources.getColor(R.color.white))
-                    val icon = ContextCompat.getDrawable(this, R.drawable.dark_mode);
-                    icon?.setColorFilter(ContextCompat.getColor(this, R.color.white), PorterDuff.Mode.SRC_IN);
-                    topAppBar.menu.getItem(0).icon = icon
+                    val icon = ContextCompat.getDrawable(this, R.drawable.light_mode).apply {
+                        if (Build.VERSION.SDK_INT >= 29) {
+                            this?.colorFilter = BlendModeColorFilter(ContextCompat.getColor(this@MainActivity, R.color.white), BlendMode.SRC_ATOP)
+                        } else {
+                            this?.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.white), PorterDuff.Mode.SRC_ATOP)
+                        }
+                    }
+                    topAppBar.apply {
+                        setNavigationIconTint(ContextCompat.getColor(this@MainActivity, R.color.white))
+                        menu.getItem(0).icon = icon
+                    }
                     false
                 }
                 true -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    topAppBar.setNavigationIconTint(resources.getColor(R.color.black))
-                    val icon = ContextCompat.getDrawable(this, R.drawable.dark_mode);
-                    icon?.setColorFilter(ContextCompat.getColor(this, R.color.black), PorterDuff.Mode.SRC_IN);
-                    topAppBar.menu.getItem(0).icon = icon
+                    val icon = ContextCompat.getDrawable(this, R.drawable.dark_mode).apply {
+                        if (Build.VERSION.SDK_INT >= 29) {
+                            this?.colorFilter = BlendModeColorFilter(ContextCompat.getColor(this@MainActivity, R.color.black), BlendMode.SRC_ATOP)
+                        } else {
+                            this?.setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.black), PorterDuff.Mode.SRC_ATOP)
+                        }
+                    }
+                    topAppBar.apply {
+                        setNavigationIconTint(ContextCompat.getColor(this@MainActivity, R.color.black))
+                        menu.getItem(0).icon = icon
+                    }
                     true
                 }
             }
@@ -68,9 +81,5 @@ class MainActivity : AppCompatActivity() {
         fabBtn.setOnClickListener {
 
         }
-    }
-
-    private fun name() {
-
     }
 }
